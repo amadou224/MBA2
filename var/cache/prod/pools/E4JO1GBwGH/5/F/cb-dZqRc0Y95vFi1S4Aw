@@ -1,0 +1,167 @@
+<?php return [PHP_INT_MAX, static function () {
+
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+            clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'name' => [
+                    'App\\Entity\\Trajet',
+                ],
+                'namespace' => [
+                    'App\\Entity',
+                ],
+                'rootEntityName' => [
+                    'App\\Entity\\Trajet',
+                ],
+                'customRepositoryClassName' => [
+                    'App\\Repository\\TrajetRepository',
+                ],
+                'identifier' => [
+                    [
+                        'id',
+                    ],
+                ],
+                'generatorType' => [
+                    4,
+                ],
+                'fieldMappings' => [
+                    [
+                        'id' => [
+                            'fieldName' => 'id',
+                            'type' => 'integer',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'id' => true,
+                            'columnName' => 'id',
+                        ],
+                        'dateTrajet' => [
+                            'fieldName' => 'dateTrajet',
+                            'type' => 'datetime',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'date_trajet',
+                        ],
+                    ],
+                ],
+                'fieldNames' => [
+                    [
+                        'id' => 'id',
+                        'date_trajet' => 'dateTrajet',
+                    ],
+                ],
+                'columnNames' => [
+                    [
+                        'id' => 'id',
+                        'dateTrajet' => 'date_trajet',
+                    ],
+                ],
+                'table' => [
+                    [
+                        'name' => 'trajet',
+                    ],
+                ],
+                'associationMappings' => [
+                    [
+                        'reservations' => [
+                            'fieldName' => 'reservations',
+                            'mappedBy' => 'trajet',
+                            'targetEntity' => 'App\\Entity\\Reservation',
+                            'cascade' => [],
+                            'orphanRemoval' => false,
+                            'fetch' => 2,
+                            'type' => 4,
+                            'inversedBy' => null,
+                            'isOwningSide' => false,
+                            'sourceEntity' => 'App\\Entity\\Trajet',
+                            'isCascadeRemove' => false,
+                            'isCascadePersist' => false,
+                            'isCascadeRefresh' => false,
+                            'isCascadeMerge' => false,
+                            'isCascadeDetach' => false,
+                        ],
+                        'vehicule' => [
+                            'fieldName' => 'vehicule',
+                            'joinColumns' => [
+                                [
+                                    'name' => 'vehicule_id',
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                            'cascade' => [],
+                            'inversedBy' => null,
+                            'targetEntity' => 'App\\Entity\\Vehicule',
+                            'fetch' => 2,
+                            'type' => 2,
+                            'mappedBy' => null,
+                            'isOwningSide' => true,
+                            'sourceEntity' => 'App\\Entity\\Trajet',
+                            'isCascadeRemove' => false,
+                            'isCascadePersist' => false,
+                            'isCascadeRefresh' => false,
+                            'isCascadeMerge' => false,
+                            'isCascadeDetach' => false,
+                            'sourceToTargetKeyColumns' => [
+                                'vehicule_id' => 'id',
+                            ],
+                            'joinColumnFieldNames' => [
+                                'vehicule_id' => 'vehicule_id',
+                            ],
+                            'targetToSourceKeyColumns' => [
+                                'id' => 'vehicule_id',
+                            ],
+                            'orphanRemoval' => false,
+                        ],
+                        'chauffeur' => [
+                            'fieldName' => 'chauffeur',
+                            'joinColumns' => [
+                                [
+                                    'name' => 'chauffeur_id',
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                            'cascade' => [],
+                            'inversedBy' => null,
+                            'targetEntity' => 'App\\Entity\\Chauffeur',
+                            'fetch' => 2,
+                            'type' => 2,
+                            'mappedBy' => null,
+                            'isOwningSide' => true,
+                            'sourceEntity' => 'App\\Entity\\Trajet',
+                            'isCascadeRemove' => false,
+                            'isCascadePersist' => false,
+                            'isCascadeRefresh' => false,
+                            'isCascadeMerge' => false,
+                            'isCascadeDetach' => false,
+                            'sourceToTargetKeyColumns' => [
+                                'chauffeur_id' => 'id',
+                            ],
+                            'joinColumnFieldNames' => [
+                                'chauffeur_id' => 'chauffeur_id',
+                            ],
+                            'targetToSourceKeyColumns' => [
+                                'id' => 'chauffeur_id',
+                            ],
+                            'orphanRemoval' => false,
+                        ],
+                    ],
+                ],
+                'idGenerator' => [
+                    $o[1],
+                ],
+            ],
+        ],
+        $o[0],
+        []
+    );
+
+}];

@@ -1,0 +1,134 @@
+<?php return [PHP_INT_MAX, static function () {
+
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+            clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'name' => [
+                    'App\\Entity\\Message',
+                ],
+                'namespace' => [
+                    'App\\Entity',
+                ],
+                'rootEntityName' => [
+                    'App\\Entity\\Message',
+                ],
+                'customRepositoryClassName' => [
+                    'App\\Repository\\MessageRepository',
+                ],
+                'identifier' => [
+                    [
+                        'id',
+                    ],
+                ],
+                'generatorType' => [
+                    4,
+                ],
+                'fieldMappings' => [
+                    [
+                        'id' => [
+                            'fieldName' => 'id',
+                            'type' => 'integer',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'id' => true,
+                            'columnName' => 'id',
+                        ],
+                        'dateMessage' => [
+                            'fieldName' => 'dateMessage',
+                            'type' => 'datetime',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'date_message',
+                        ],
+                        'pathMsg' => [
+                            'fieldName' => 'pathMsg',
+                            'type' => 'string',
+                            'scale' => 0,
+                            'length' => 255,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'path_msg',
+                        ],
+                    ],
+                ],
+                'fieldNames' => [
+                    [
+                        'id' => 'id',
+                        'date_message' => 'dateMessage',
+                        'path_msg' => 'pathMsg',
+                    ],
+                ],
+                'columnNames' => [
+                    [
+                        'id' => 'id',
+                        'dateMessage' => 'date_message',
+                        'pathMsg' => 'path_msg',
+                    ],
+                ],
+                'table' => [
+                    [
+                        'name' => 'message',
+                    ],
+                ],
+                'associationMappings' => [
+                    [
+                        'user' => [
+                            'fieldName' => 'user',
+                            'joinColumns' => [
+                                [
+                                    'name' => 'user_id',
+                                    'unique' => false,
+                                    'nullable' => false,
+                                    'onDelete' => null,
+                                    'columnDefinition' => null,
+                                    'referencedColumnName' => 'id',
+                                ],
+                            ],
+                            'cascade' => [],
+                            'inversedBy' => 'messages',
+                            'targetEntity' => 'App\\Entity\\User',
+                            'fetch' => 2,
+                            'type' => 2,
+                            'mappedBy' => null,
+                            'isOwningSide' => true,
+                            'sourceEntity' => 'App\\Entity\\Message',
+                            'isCascadeRemove' => false,
+                            'isCascadePersist' => false,
+                            'isCascadeRefresh' => false,
+                            'isCascadeMerge' => false,
+                            'isCascadeDetach' => false,
+                            'sourceToTargetKeyColumns' => [
+                                'user_id' => 'id',
+                            ],
+                            'joinColumnFieldNames' => [
+                                'user_id' => 'user_id',
+                            ],
+                            'targetToSourceKeyColumns' => [
+                                'id' => 'user_id',
+                            ],
+                            'orphanRemoval' => false,
+                        ],
+                    ],
+                ],
+                'idGenerator' => [
+                    $o[1],
+                ],
+            ],
+        ],
+        $o[0],
+        []
+    );
+
+}];

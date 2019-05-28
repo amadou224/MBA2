@@ -1,0 +1,172 @@
+<?php return [PHP_INT_MAX, static function () {
+
+    return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+        $o = [
+            clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\ClassMetadata'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\ClassMetadata')),
+            clone ($p['Doctrine\\ORM\\Id\\IdentityGenerator'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Id\\IdentityGenerator')),
+        ],
+        null,
+        [
+            'stdClass' => [
+                'name' => [
+                    'App\\Entity\\Facture',
+                ],
+                'namespace' => [
+                    'App\\Entity',
+                ],
+                'rootEntityName' => [
+                    'App\\Entity\\Facture',
+                ],
+                'customRepositoryClassName' => [
+                    'App\\Repository\\FactureRepository',
+                ],
+                'identifier' => [
+                    [
+                        'id',
+                    ],
+                ],
+                'generatorType' => [
+                    4,
+                ],
+                'fieldMappings' => [
+                    [
+                        'id' => [
+                            'fieldName' => 'id',
+                            'type' => 'integer',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'id' => true,
+                            'columnName' => 'id',
+                        ],
+                        'prixTotal' => [
+                            'fieldName' => 'prixTotal',
+                            'type' => 'float',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'prix_total',
+                        ],
+                        'TVA' => [
+                            'fieldName' => 'TVA',
+                            'type' => 'float',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'tva',
+                        ],
+                        'horsTaxe' => [
+                            'fieldName' => 'horsTaxe',
+                            'type' => 'float',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => true,
+                            'precision' => 0,
+                            'columnName' => 'hors_taxe',
+                        ],
+                        'status' => [
+                            'fieldName' => 'status',
+                            'type' => 'string',
+                            'scale' => 0,
+                            'length' => 150,
+                            'unique' => false,
+                            'nullable' => true,
+                            'precision' => 0,
+                            'columnName' => 'status',
+                        ],
+                        'dateFacture' => [
+                            'fieldName' => 'dateFacture',
+                            'type' => 'datetime',
+                            'scale' => 0,
+                            'length' => null,
+                            'unique' => false,
+                            'nullable' => false,
+                            'precision' => 0,
+                            'columnName' => 'date_facture',
+                        ],
+                    ],
+                ],
+                'fieldNames' => [
+                    [
+                        'id' => 'id',
+                        'prix_total' => 'prixTotal',
+                        'tva' => 'TVA',
+                        'hors_taxe' => 'horsTaxe',
+                        'status' => 'status',
+                        'date_facture' => 'dateFacture',
+                    ],
+                ],
+                'columnNames' => [
+                    [
+                        'id' => 'id',
+                        'prixTotal' => 'prix_total',
+                        'TVA' => 'tva',
+                        'horsTaxe' => 'hors_taxe',
+                        'status' => 'status',
+                        'dateFacture' => 'date_facture',
+                    ],
+                ],
+                'table' => [
+                    [
+                        'name' => 'facture',
+                    ],
+                ],
+                'associationMappings' => [
+                    [
+                        'reservation' => [
+                            'fieldName' => 'reservation',
+                            'targetEntity' => 'App\\Entity\\Reservation',
+                            'joinColumns' => [],
+                            'mappedBy' => 'facture',
+                            'inversedBy' => null,
+                            'cascade' => [
+                                'persist',
+                                'remove',
+                            ],
+                            'orphanRemoval' => false,
+                            'fetch' => 2,
+                            'type' => 1,
+                            'isOwningSide' => false,
+                            'sourceEntity' => 'App\\Entity\\Facture',
+                            'isCascadeRemove' => true,
+                            'isCascadePersist' => true,
+                            'isCascadeRefresh' => false,
+                            'isCascadeMerge' => false,
+                            'isCascadeDetach' => false,
+                        ],
+                        'supplement' => [
+                            'fieldName' => 'supplement',
+                            'mappedBy' => 'facture',
+                            'targetEntity' => 'App\\Entity\\Supplement',
+                            'cascade' => [],
+                            'orphanRemoval' => true,
+                            'fetch' => 2,
+                            'type' => 4,
+                            'inversedBy' => null,
+                            'isOwningSide' => false,
+                            'sourceEntity' => 'App\\Entity\\Facture',
+                            'isCascadeRemove' => true,
+                            'isCascadePersist' => false,
+                            'isCascadeRefresh' => false,
+                            'isCascadeMerge' => false,
+                            'isCascadeDetach' => false,
+                        ],
+                    ],
+                ],
+                'idGenerator' => [
+                    $o[1],
+                ],
+            ],
+        ],
+        $o[0],
+        []
+    );
+
+}];
