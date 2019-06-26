@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Jekyll v3.8.5">
+
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="stylesheets/base.css">
+<link rel="stylesheet" href="stylesheets/aeroport.css">
+{% endblock %}
+
+{% block body %}
+
+    <div >
+        <h3  style="background-color:#780E47; heigth:50px; text-align:center; color:white">MEMORIAL DE NATZWEILER-STRUTHOF</h3>
+    </div>
+
+    <div class="content">
+            <img src="https://www.onac-vg.fr/sites/default/files/styles/home/public/2018-08/Centre%20europ%C3%A9en%20du%20r%C3%A9sistant%20d%C3%A9port%C3%A9%20-%20site%20du%20Struthof0002.jpg?itok=XS9zxJ7b" alt ="" width="1920" height="70" >
+           
+    </div>
+
+        
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- <a class="navbar-brand" href="#">Navbar</a>  -->
+                
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor09" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+
+           <div class="collapse navbar-collapse" id="navbarColor01">
+
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                    <a class="nav-link" href="memorialPageAcceuil">Acceuil <span class="sr-only">(current)</span></a>
+                        </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="informations">Informations</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link " href="tarif">tarif</a>        <!--   tarif -->
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="contact">Contact</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="galerieDuSite">Galerie</a>
+                    </li>
+                </ul>
+    </div>
+    </nav> </br>
+</br>
+
+    <h5 style="text-align:center;text-decoration:underline"><strong> <em> Les informations suivantes sont elles exactes ? </em></strong></h5>
+           <div style="text-align:center">
+                <h5><strong>Lieu de départ:</strong>&nbsp{{memorial.depart}}</h5></br>
+                <h5><strong>Destination:</strong>&nbsp{{memorial.destination}}</h5></br>       
+                <h5><strong>E-mail:</strong>&nbsp{{memorial.email}}</h5></br>
+                <h5><strong>Téléphone:</strong>&nbsp{{memorial.telephone}}</h5></br>
+                <h5><strong>Nombre de passagers Aller:</strong>&nbsp{{memorial.nombrePassagerAller}}</h5></br>
+                <h5><strong>Nombre de passagers Rétour:</strong>&nbsp{{memorial.nombrePassagerRetour}}</h5></br>
+                <h5><strong>Date de départ:</strong>&nbsp{{memorial.dateDepart| date('d/m/Y')}}</h5></br>
+                <h5><strong>Date de rétour:</strong>&nbsp{{memorial.dateRetour| date('d/m/Y')}}</h5></br>
+                <h5><strong>Heure de départ:</strong>&nbsp{{memorial.horaireDeDepart}}</h5></br>
+                <h5><strong>Heure de rétour:</strong>&nbsp{{memorial.horaireRetour}}</h5></br>  
+
+                {% if  (memorial.nombrePassagerAller<=4) and (memorial.nombrePassagerRetour<=4)  %}
+                <h5><strong>Prix:</strong>&nbsp 160€</h5></br>
+                {% else %} 
+                <h5><strong>Prix:</strong>&nbsp 300€</h5></br>
+                {% endif %}
+          </div>
+            <center>
+<a href="{{ path('envoieMailAllerRetourRoute', {'nbrePassagerAller': memorial.nombrePassagerAller,'nbrePassagerRetour':memorial.nombrePassagerRetour ,
+                                        'email' : memorial.email, 'depart' : memorial.depart, 
+                                         'destination': memorial.destination, 'telephone': memorial.telephone, 
+                                         'heureDepart': memorial.horaireDeDepart, 'heureRetour':memorial.horaireRetour,
+                                         'dateDepart': memorial.dateDepart | date('d-m-Y'), 'dateRetour':memorial.dateRetour | date('d-m-Y')
+                                            })}}" class="btn btn-green">Confirmer</a>
+                <!-- <a href="terminusAllerSimple" class="btn btn-yellow"  type="submit">Confirmer la réservation</a> -->                             
+                <a href="memorialPageAcceuil" class="btn btn-red"  type="submit">Modifier</a>
+            </center>    
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="javascript/reservationAeroport.js"></script>
+
+{% endblock %}

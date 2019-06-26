@@ -58,7 +58,7 @@ class Chauffeur
 
     public function getNom(): ?string
     {
-        return $this->nom;
+        return $this->nom;   
     }
 
     public function setNom(string $nom): self
