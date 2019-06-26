@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<head>
+
+
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <p>Bonjour :
+        <b>{{Reservation.user.civilite}}
+
+            {{Reservation.user.nom}}
+            {{Reservation.user.prenom}}
+        </b>,
+    </p>
+
+    <br><p>Votre demande a bien été enregistrée pour le(s) trajet(s) suivant(s) :</p><br><br>
+
+    {% if Reservation1 is null %}
+
+        <p>Type de trajet :
+            <b>
+                Allez simple</b>
+        </p><br>
+
+        <p>Départ:<b>{{Reservation.departDestination.depart}}</b>
+        </p>
+        <p></p>
+        <p>Destination:<b>{{Reservation.departDestination.destination}}</b>
+        </p>
+
+        <p>Date:
+            <b>{{Reservation.dateDepart | date("d/m/y")}}</b>
+        </p>
+        <p>
+            Heure:<b>{{Reservation.horraire}}</b>
+        </p>
+    </p>
+    <p>
+        Nombre de passager:
+        <b>{{Reservation.nbPassager}}</b>
+    </p>
+
+    {% if Reservation.pointDePrise == "Domicile" %}
+        <p>
+            Point de prise:
+            <b>{{Reservation.pointDePrise}}</b>
+        </p>
+
+        <p>
+            Adresse:
+            <b>{{Reservation.adresse}}</b>
+        </p>
+        <p></p>
+        <p>
+            Code postal:
+            <b>{{Reservation.codepostal}}</b>
+
+        </p>
+        <p></p>
+        <p>
+            Ville:
+            <b>{{Reservation.Ville}}</b>
+        </p>
+        <p></p>
+    {% else %}
+        <p>
+            Point de prise:
+            <b>{{Reservation.pointDePrise}}</b>
+        </p>
+
+    {% endif %}
+
+    <br><p>
+        <b>prix total:</b>
+        {{Prix}}</p><br>
+
+
+{% else %}
+    <p>Type de trajet :<b>
+            Allez-Retour</b>
+    </p>
+    <br>
+    <p>
+        <b>Trajet Allez</b>
+    </p>
+    <p>Départ:<b>{{Reservation.departDestination.depart}}</b>
+    </p>
+    <p>Destination:<b>{{Reservation.departDestination.destination}}</b>
+    </p>
+    <p>Date:<b>{{Reservation.dateDepart | date("d/m/y")}}</b>
+    </p>
+    <p>Heure:<b>{{Reservation.horraire}}</b>
+    </p>
+</p>
+<p>Nombre de passager:<b>{{Reservation.nbPassager}}</b>
+</p>
+{% if Reservation.pointDePrise == "Domicile" %}
+    <p>Point de prise:<b>{{Reservation.pointDePrise}}</b>
+    </p>
+    <p>Adresse:<b>{{Reservation.adresse}}</b>
+    </p>
+    <p></p>
+    <p>Code postal:<b>{{Reservation.codepostal}}</b>
+    </p>
+    <p></p>
+    <p>Ville:<b>{{Reservation.Ville}}</b>
+    </p>
+    <p></p>
+{% else %}
+    <p>Point de prise:<b>{{Reservation.pointDePrise}}</b>
+    </p>
+{% endif %}
+<br><p>
+    <b>prix total:</b>
+    {{Prix}}</p><br>{# -------------------------------------------------------------------------Retour..................................................................... #}<br><br><p>
+    <b>Trajet Retour</b>
+</p>
+<p>Départ:<b>{{Reservation1.departDestination.depart}}</b>
+</p>
+<p></p>
+<p>Destination:<b>{{Reservation1.departDestination.destination}}</b>
+</p>
+<p>Date:<b>{{Reservation1.dateDepart | date("d/m/y")}}</b>
+</p>
+<p>Heure:<b>{{Reservation1.horraire}}</b>
+</p>
+<p>Nombre de passager:<b>{{Reservation1.nbPassager}}</b>
+</p>
+{% if Reservation1.pointDePrise == "Domicile" %}
+    <p>Point de prise:<b>{{Reservation1.pointDePrise}}</b>
+    </p>
+    <p>Adresse:<b>{{Reservation1.adresse}}</b>
+    </p>
+    <p></p>
+    <p>Code postal:<b>{{Reservation1.codepostal}}</b>
+    </p>
+    <p></p>
+    <p>Ville:<b>{{Reservation1.Ville}}</b>
+    </p>
+    <p></p>
+{% else %}
+    <p>Point de prise:<b>{{Reservation1.pointDePrise}}</b>
+    </p>
+{% endif %}{% endif %}<br><b>prix total:</b>{{Prix1}}</p><br><p>Vous recevrez prochainement un mail avec les dernières informations concernant votre trajet (nom du conducteur, son numéro de portable). Vous pouvez également à tout moment retrouver ces informations sur Alsace-navette.com en vous connectant à l’aide de votre adresse e-mail et du mot de passe que vous avez reçu par courriel lors de votre première réservation.</p><p>Merci de votre confiance et à bientôt sur Alsace-Navette.com</p><p>Téléchargez votre facture ici :</p><b>prix total:</b>{{Prix}}</p><br><p>Vous recevrez prochainement un mail avec les dernières informations concernant votre trajet (nom du conducteur, son numéro de portable). Vous pouvez également à tout moment retrouver ces informations sur Alsace-navette.com en vous connectant à l’aide de votre adresse e-mail et du mot de passe que vous avez reçu par courriel lors de votre première réservation.</p><p>Merci de votre confiance et à bientôt sur Alsace-Navette.com</p><p>Téléchargez votre facture ici :<a href="http://127.0.0.1:8000/Facture/Edit/{{Reservation.id}}">Télécharger votre facture</a></p><p>Pour nous aider à améliorer nos services, nous avons mis en place un sondage, accessible ici.</p><br><br><p>Alsace navette</p><p>2, Rue du Coq</p><p>67000 Strasbourg</p><p>Tel : 03.88.22.22.71</p><p>En cas d'urgence : 06.27.18.12.52</p><p>Pour nous aider à améliorer nos services, nous avons mis en place un sondage, accessible ici.</p><br><br><p>Alsace navette</p><p>2, Rue du Coq</p><p>67000 Strasbourg</p><p>Tel : 03.88.22.22.71</p><p>En cas d'urgence : 06.27.18.12.52</p></body></html>{# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ #}

@@ -22,35 +22,18 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
             '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
             '/royalpalace' => [[['_route' => 'royalpalace', '_controller' => 'App\\Controller\\AnnexesController::index'], null, null, null, false, false, null]],
             '/royalpalacereservation' => [[['_route' => 'royalpalacereservation', '_controller' => 'App\\Controller\\AnnexesController::royalpalaceRouteReservation'], null, null, null, false, false, null]],
-            '/reservationAllerRoyalPalace' => [[['_route' => 'reservationAllerRoyalPalace', '_controller' => 'App\\Controller\\AnnexesController::ConfirmationAllerRoyalRoute'], null, null, null, false, false, null]],
-            '/reservationAllerRetourRoyalPalace' => [[['_route' => 'reservationAllerRetourRoyalPalace', '_controller' => 'App\\Controller\\AnnexesController::ConfirmationAllerRetourRoyalRoute'], null, null, null, false, false, null]],
-            '/reservationEffectuee' => [[['_route' => 'reservationEffectuee', '_controller' => 'App\\Controller\\AnnexesController::terminusReservationRoute'], null, null, null, false, false, null]],
-            '/envoieBddRoyalPalaceAller' => [[['_route' => 'envoieBddRoyalPalaceAller', '_controller' => 'App\\Controller\\AnnexesController::envoieBddRoyalPalaceAller'], null, null, null, false, false, null]],
-            '/envoieBddRoyalPalaceAllerRetour' => [[['_route' => 'envoieBddRoyalPalaceAllerRetour', '_controller' => 'App\\Controller\\AnnexesController::envoieBddRoyalPalaceAllerRetour'], null, null, null, false, false, null]],
             '/app/mobile' => [[['_route' => 'app_mobile', '_controller' => 'App\\Controller\\AppMobileController::index'], null, null, null, false, false, null]],
             '/app/user' => [[['_route' => 'user', '_controller' => 'App\\Controller\\AppMobileController::query'], null, null, null, false, false, null]],
             '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::homeRoute'], null, null, null, false, false, null]],
+            '/Administration' => [[['_route' => 'AdministrationContoller', '_controller' => 'App\\Controller\\HomeController::Administration'], null, null, null, false, false, null]],
             '/aeroport' => [[['_route' => 'aeroport', '_controller' => 'App\\Controller\\HomeController::aeroportRoute'], null, null, null, false, false, null]],
-            '/transport' => [[['_route' => 'transport', '_controller' => 'App\\Controller\\HomeController::transportRoute'], null, null, null, false, false, null]],
-            '/contact' => [[['_route' => 'contact', '_controller' => 'App\\Controller\\HomeController::contactRoute'], null, null, null, false, false, null]],
-            '/informations' => [[['_route' => 'informations', '_controller' => 'App\\Controller\\HomeController::informationsRoute'], null, null, null, false, false, null]],
-            '/tarif' => [[['_route' => 'tarif', '_controller' => 'App\\Controller\\HomeController::tarifRoute'], null, null, null, false, false, null]],
-            '/acceuil' => [[['_route' => 'acceuil', '_controller' => 'App\\Controller\\HomeController::acceuilRoute'], null, null, null, false, false, null]],
-            '/visiteDuSite' => [[['_route' => 'visiteDuSite', '_controller' => 'App\\Controller\\HomeController::visiteSiteRoute'], null, null, null, false, false, null]],
-            '/tarifDuSite' => [[['_route' => 'tarifDuSite', '_controller' => 'App\\Controller\\HomeController::tarifDuSiteRoute'], null, null, null, false, false, null]],
-            '/galerieDuSite' => [[['_route' => 'galerieDuSite', '_controller' => 'App\\Controller\\HomeController::galerieDuSiteRoute'], null, null, null, false, false, null]],
-            '/horaireDuSite' => [[['_route' => 'horaireDuSite', '_controller' => 'App\\Controller\\HomeController::horaireDuSiteRoute'], null, null, null, false, false, null]],
-            '/memorialPageAcceuil' => [[['_route' => 'memorialPageAcceuil', '_controller' => 'App\\Controller\\HomeController::memorialPageAcceuilRoute'], null, null, null, false, false, null]],
-            '/confirmation' => [[['_route' => 'confirmation', '_controller' => 'App\\Controller\\HomeController::confirmationRoute'], null, null, null, false, false, null]],
-            '/confirmationAllerRetour' => [[['_route' => 'confirmationAllerRetour', '_controller' => 'App\\Controller\\HomeController::confirmationAllerRetourRoute'], null, null, null, false, false, null]],
-            '/terminusAllerSimple' => [[['_route' => 'terminusAllerSimple', '_controller' => 'App\\Controller\\HomeController::terminusReservationRoute'], null, null, null, false, false, null]],
-            '/envoieBddMemorialAller' => [[['_route' => 'envoieBddMemorialAller', '_controller' => 'App\\Controller\\HomeController::envoieBddMemorialAller'], null, null, null, false, false, null]],
-            '/envoieBddMemorialAllerRetour' => [[['_route' => 'envoieBddMemorialAllerRetour', '_controller' => 'App\\Controller\\HomeController::envoieBddMemorialAllerRetour'], null, null, null, false, false, null]],
             '/horairesTarifs' => [[['_route' => 'horairesTarifs', '_controller' => 'App\\Controller\\HomeController::aeroportRouteHorairesTarifs'], null, null, null, false, false, null]],
             '/profile' => [[['_route' => 'profile', '_controller' => 'App\\Controller\\HomeController::Profile'], null, null, null, false, false, null]],
             '/infoDestination' => [[['_route' => 'infoDestination', '_controller' => 'App\\Controller\\HomeController::infoDestination'], null, null, null, false, false, null]],
             '/reservationAller' => [[['_route' => 'reservationAller', '_controller' => 'App\\Controller\\HomeController::reservationAller'], null, null, null, false, false, null]],
             '/reservation' => [[['_route' => 'reservation', '_controller' => 'App\\Controller\\HomeController::reservation'], null, null, null, false, false, null]],
+            '/facture' => [[['_route' => 'Facture', '_controller' => 'App\\Controller\\HomeController::Factures'], null, null, null, false, false, null]],
+            '/payement' => [[['_route' => 'payement', '_controller' => 'App\\Controller\\HomeController::PayementStripe'], null, null, null, false, false, null]],
             '/registration' => [[['_route' => 'security_registration', '_controller' => 'App\\Controller\\SecurityController::registration'], null, null, null, false, false, null]],
             '/login' => [[['_route' => 'security_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
             '/logout' => [[['_route' => 'security_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
@@ -73,10 +56,16 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
                             .'|(*:159)'
                         .')'
                     .')'
-                    .'|/envoieMail(?'
-                        .'|Route/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)(*:242)'
-                        .'|AllerRetourRoute/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)/([^/]++)(*:356)'
+                    .'|/admistration/(?'
+                        .'|reservation/(?'
+                            .'|aeroport/([^/]++)(*:218)'
+                            .'|([^/]++)(*:234)'
+                        .')'
+                        .'|annulation/([^/]++)(*:262)'
                     .')'
+                    .'|/Facture/([^/]++)(*:288)'
+                    .'|/ficheDeMission/([^/]++)(*:320)'
+                    .'|/horaires23/([^/]++)(*:348)'
                 .')/?$}sDu',
         ];
         $this->dynamicRoutes = [
@@ -87,8 +76,12 @@ class srcApp_KernelDevDebugContainerUrlMatcher extends Symfony\Bundle\FrameworkB
             136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'], ['token'], null, null, false, false, null]],
             149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
             159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-            242 => [[['_route' => 'envoieMailRoute', '_controller' => 'App\\Controller\\HomeController::envoieMailRoute'], ['nbrePassager', 'email', 'depart', 'destination', 'heureDepart', 'dateDepart'], null, null, false, true, null]],
-            356 => [[['_route' => 'envoieMailAllerRetourRoute', '_controller' => 'App\\Controller\\HomeController::envoieMailAllerRetourRoute'], ['nbrePassagerAller', 'nbrePassagerRetour', 'email', 'depart', 'destination', 'telephone', 'heureDepart', 'heureRetour', 'dateDepart', 'dateRetour'], null, null, false, true, null]],
+            218 => [[['_route' => 'admistration_reservation_aeroport', '_controller' => 'App\\Controller\\AdmistrationReservationAeroportController::ModifierReservation'], ['id'], null, null, false, true, null]],
+            234 => [[['_route' => 'modifie_reservation', '_controller' => 'App\\Controller\\AdmistrationReservationAeroportController::Modification'], ['id'], null, null, false, true, null]],
+            262 => [[['_route' => 'annulation_reservation', '_controller' => 'App\\Controller\\AdmistrationReservationAeroportController::Annulation'], ['id'], null, null, false, true, null]],
+            288 => [[['_route' => 'facture', '_controller' => 'App\\Controller\\AdmistrationReservationAeroportController::pdf'], ['id'], null, null, false, true, null]],
+            320 => [[['_route' => 'FicheDeMission', '_controller' => 'App\\Controller\\AdmistrationReservationAeroportController::FicheDeMission'], ['id'], null, null, true, true, null]],
+            348 => [[['_route' => 'horairesDynamiques', '_controller' => 'App\\Controller\\HomeController::horairesdynamique'], ['id'], null, null, false, true, null]],
         ];
     }
 }

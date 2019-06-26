@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="Jekyll v3.8.5" name="generator">
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="stylesheets/base.css" rel="stylesheet">
+    <link href="stylesheets/aeroport.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" style="border-style:dotted;">
+
+
+        <h1>
+            Les derniers Biens</h1>
+        <div class="row">
+            {% for property in Reservation %}
+
+                <div class="col-4" style="margin-bottom:30px">
+                    <div class="card" style="weight:100px;">
+
+                        <a class="card-body" href="{{ path('admistration_reservation_aeroport',{'id':property.id})}}">
+
+
+                            <h5 class="card-title" style="color:blue">{{property.departDestination.depart}}--->{{property.departDestination.destination}}</h5>
+                            {# <a href="#">{{property.departDestination.depart}}/{{property.departDestination.depart}}</a> #}
+
+                            <p class="card-text">
+                                <b>Date:</b>
+                                {{property.dateDepart | date("d/m/y")}}</p>
+                            <p class="card-text">
+                                <b>Heure:</b>
+                                {{property.horraire}}</p>
+                            <p class="card-text">
+                                <b>Nombre de passager:</b>
+                                {{property.nbPassager}}</p>
+                            <p class="card-text">
+                                <b>Client:</b>
+                                {{property.user.nom}}
+                                {{property.user.prenom}}</p>
+                            <p class="card-text">
+                                <b>Contact:</b>
+                                {{property.user.telportable}}</p>
+                            <p class="card-text">
+                                <b>E-mail:</b>
+                                {{property.user.email}}</p>
+
+                            {% if property.Statu is null %}
+                                <p>
+                                    <div class="p-3 mb-2 bg-danger text-dark">
+
+
+                                        <b>Status:</b>
+                                        Encour...</div>
+                                </p>
+                            {% elseif property.Statu == "Confirmer" %}
+
+
+                                <p>
+                                    <div class="p-3 mb-2 bg-success text-dark">
+
+
+                                        <b>Status:</b>
+                                        Confirmer.....</div>
+                                </p>
+
+                            {% else %}
+                                <p>
+                                    <div class="p-3 mb-2 bg-light text-dark">
+
+
+                                        <b>Status:</b>
+                                        Annuler.....</div>
+                                </p>
+
+
+                            {% endif %}
+                        </a>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="javascript/reservationAeroport.js"></script>
+
+
+    <script src="javascript/fonctionsjquery.js"></script>
+
+{% endblock %}

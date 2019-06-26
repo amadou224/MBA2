@@ -849,7 +849,7 @@ class __TwigTemplate_52b6bf25eda3954298893dd252367c0668ff366ff09321972b5c711438e
             $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "macro", "dump_request_data"));
 
             // line 520
-            $context["__internal_962b1652869aab4601270895f4bb64be1c1421661551b54736f4f07cd8d08942"] = $this;
+            $context["__internal_a09ec6cbc141f5b37c3054c04879081d9ff197dcc604a8d2c0ca3bc53a967e8d"] = $this;
             // line 521
             echo "                {
                     \"id\": \"";
@@ -863,7 +863,7 @@ class __TwigTemplate_52b6bf25eda3954298893dd252367c0668ff366ff09321972b5c711438e
                     \"events\": [
 ";
             // line 525
-            echo $context["__internal_962b1652869aab4601270895f4bb64be1c1421661551b54736f4f07cd8d08942"]->macro_dump_events((isset($context["events"]) || array_key_exists("events", $context) ? $context["events"] : (function () { throw new RuntimeError('Variable "events" does not exist.', 525, $this->source); })()));
+            echo $context["__internal_a09ec6cbc141f5b37c3054c04879081d9ff197dcc604a8d2c0ca3bc53a967e8d"]->macro_dump_events((isset($context["events"]) || array_key_exists("events", $context) ? $context["events"] : (function () { throw new RuntimeError('Variable "events" does not exist.', 525, $this->source); })()));
             echo "
                     ]
                 }
@@ -1657,6 +1657,6 @@ class __TwigTemplate_52b6bf25eda3954298893dd252367c0668ff366ff09321972b5c711438e
         <canvas width=\"680\" height=\"\" id=\"{{ id }}\" class=\"timeline\"></canvas>
     </div>
 {% endmacro %}
-", "@WebProfiler/Collector/time.html.twig", "C:\\FZ Symfony\\Symfony\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
+", "@WebProfiler/Collector/time.html.twig", "C:\\MBA\\ProjetDeSatge2019\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\time.html.twig");
     }
 }

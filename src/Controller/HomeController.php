@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Twig\Environment;
 use App\Entity\Lieux;
 use App\Entity\Trajet;
 use App\Entity\Reservation;
@@ -11,12 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\MemorialAller;
-use App\Entity\MemorialAllerRetour;
-
-
-
-
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\LieuxRepository;
+use phpDocumentor\Reflection\Types\Integer;
+use App\Repository\ReservationRepository;
 
 class HomeController extends AbstractController
 {
@@ -30,6 +31,31 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+    /**
+     * @Route("/Administration", name="AdministrationContoller")
+     */
+    public function Administration(ObjectManager $manager, LieuxRepository $Lieux)
+    {
+        $Reser = $this->getDoctrine()->getRepository(Reservation::class);
+        $Reservation = $Reser->findAll();
+        dump($Reservation);
+
+        return $this->render('aeroport/AdministrationAeroport.html.twig', [
+            'Reservation' =>  $Reservation,
+        ]);
+    }
+    /**
+     * @Route("/horaires23/{id}", name="horairesDynamiques")
+     */
+    public function horairesdynamique(int $id, Request $Donneformulaire, ObjectManager $manager, LieuxRepository $Lieux): Response
+    {
+        // $id = $Donneformulaire->get("depart_aller");
+
+        $lieux = $Lieux->find($id);
+
+
+        return $this->json(["code" => 200, "message" => "voici votre liste heures", "lieux" => $lieux], 200);
+    }
 
     /**
      * @Route("/aeroport", name="aeroport")
@@ -37,285 +63,30 @@ class HomeController extends AbstractController
     public function aeroportRoute()
     {
         $repositoryLieux = $this->getDoctrine()->getRepository(Lieux::class);
+        $em = $this->getDoctrine()->getManager();
 
         $lieux = $repositoryLieux->findAll();
+        $stras = $repositoryLieux->find(78);
+        $table = array("ete" => array("05H15", "05H15", "05H15", "05H15", "05H15", "05H15"), "hiver" => array("05H00", "05H00", "05H00", "05H00", "05H00", "05H00"));
+        $table1 = array("ete" => array("05H00", "05H00", "05H00", "05H00", "05H00", "05H00"), "hiver" => array("05H35", "05H35"));
+        $stras->setHoraires($table);
+        $em->persist($stras);
+        $em->flush();
+
+
+
+
+
+
+
+        $tableHoraire = array("38" => $table, "39" => $table1);
+        dump($tableHoraire);
         return $this->render('aeroport/aeroport.html.twig', [
             'lieux' => $lieux,
+            'heures' => $stras,
+            'tableheure' => $tableHoraire,
         ]);
     }
-
-    ///////////////////////////////  AMADOU TRANSPORT MEMORIAL CONTROLLER  ///////////////////////////////////////
-
-                                               // Route transport // 
-
-    /**
-     * @Route("/transport",name="transport")
-     */
-    public function  transportRoute()  
-    {
-        return $this -> render('transport/transport.html.twig',[
-            'controller_name'=>'HomeController',
-            ]);
-    }
-
-    //  Route pour voir le contact  du client  
-
-    /**
-     * @Route("/contact", name= "contact")                 
-     */
-    public function contactRoute()
-    {
-        return $this -> render('transport/contact.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    // Route pour voir les informatiques sur le site  
-
-    /**
-     * @Route("/informations", name= "informations")
-     */
-    public function informationsRoute()
-    {
-        return $this -> render('transport/informations.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    // Route pour voir les tarif sur le site 
-
-    /**
-     * @Route("/tarif", name= "tarif")
-     */
-    public function tarifRoute()
-    {
-        return $this -> render('transport/tarif.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    // route Acceuil 
-
-    /**
-     * @Route("/acceuil", name= "acceuil")
-     */
-    public function acceuilRoute()
-    {
-        return $this -> render('transport/acceuil.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    // Route visteDusite du memorial  
-
-    /**
-     * @Route("/visiteDuSite", name= "visiteDuSite")
-     */
-    public function visiteSiteRoute()
-    {
-        return $this -> render('transport/visiteDuSite.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    /**
-     * @Route("/tarifDuSite", name= "tarifDuSite")
-     */
-    public function tarifDuSiteRoute()
-    {
-        return $this -> render('transport/tarifDuSite.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    /**
-     * @Route("/galerieDuSite", name= "galerieDuSite")
-     */
-    public function galerieDuSiteRoute()
-    {
-        return $this -> render('transport/galerieDuSite.html.twig',[
-            'controller_name' => 'HomeController',]);
-    }
-
-    /**
-     * @Route("/horaireDuSite",name="horaireDuSite")
-     */
-    public function horaireDuSiteRoute()
-    {
-        return $this -> render('transport/horaireDuSite.html.twig',[
-            'controller_name' =>'HomeController',]);
-        
-    }
-
-    //     TEST NEW ROUTE  
-
-    /**
-     * @Route("/memorialPageAcceuil", name="memorialPageAcceuil")
-     */
-    public function memorialPageAcceuilRoute()
-    {        
-        return $this->render('transport/memorialPageAcceuil.html.twig', [    
-        ]);
-    }
-
-    //           twig confirmation reservation Memorial  ALLER SIMPLE           
-
-     /**
-     * @Route("/confirmation", name="confirmation")
-     */
-    public function confirmationRoute(Request $request)
-    {      
-        $repo = $this->getDoctrine()->getRepository(MemorialAller::class);      
-        $memorial = $repo->find($request->get('id'));          
-
-        return   $this->render('transport/confirmation.html.twig', [           
-              'memorial'=>$memorial            
-        ]);
-    }
-    
-    //TWIG CONFIRMATION ALLER RETOUR transport Memorial 
-
-     /**
-     * @Route("/confirmationAllerRetour", name="confirmationAllerRetour")
-     */
-    public function confirmationAllerRetourRoute(Request $request)
-    {
-        $repo = $this->getDoctrine()->getRepository(MemorialAllerRetour::class);  
-
-        $memorial = $repo->find($request->get('id'));
-        return $this->render('transport/confirmationAllerRetour.html.twig', [
-            'memorial'=>$memorial
-        ]);
-    }
-    
-                   // FIN CONFIRMATION RESERVATION  ALLER RETOUR      
-
-    // Terminus reservation Memorial aller simple 
-
-    /**
-     * @Route("/terminusAllerSimple", name="terminusAllerSimple")
-     */
-     public function terminusReservationRoute()
-    {             
-        return $this->render('transport/terminusAllerSimple.html.twig',[
-        ]);
-    }  
-
-    // GESTION EMAIL CONTROLLER   ENVOIE MAIL ALLER SIMPLE MEMORIAL 
-
-    /**
-     * @Route("/envoieMailRoute/{nbrePassager}/{email}/{depart}/{destination}/{heureDepart}/{dateDepart}", name="envoieMailRoute")
-     */
-    public function envoieMailRoute($nbrePassager, $email, $depart, $destination, $heureDepart, $dateDepart, \Swift_Mailer $mailer)
-    {
-        $prix = $nbrePassager <= 4 ? "80€" : "120€";   // condition ternaire  use ...here ;)
-       $msgUser = "Votre reservation a bien été enregistrée\nDepart: " .$depart. 
-       "\nDestination: " .$destination. 
-       "\nNombre de passagers:" .$nbrePassager.
-       "\nHeure de départ:" .$heureDepart.
-       "\nDate de départ:" .$dateDepart.
-       "\nPrix de votre reservation: " .$prix. 
-       "\nMerci pour votre réservation";
-        $message =(new \Swift_Message('Votre reservation pour ' .$destination))
-        ->setFrom('bahamadoubailo67@gmail.com')
-        ->setTo($email)   
-        ->setBody($msgUser);
-        $mailer->send($message);
-        return $this->redirectToRoute('terminusAllerSimple');
-    }  
-  //  ROUTE ENVOIE MAIL POUR UNE RESERVATION ALLER RETOUR  MEMORIAL 
-    /**
-     * @Route("/envoieMailAllerRetourRoute/{nbrePassagerAller}/{nbrePassagerRetour}/{email}/{depart}/{destination}/{telephone}/{heureDepart}/{heureRetour}/{dateDepart}/{dateRetour}", name="envoieMailAllerRetourRoute")
-     */
-    public function envoieMailAllerRetourRoute ($nbrePassagerAller, $nbrePassagerRetour, $email, $depart, $destination, $telephone, $heureDepart, $heureRetour, $dateDepart, $dateRetour, \Swift_Mailer $mailer)
-    {   
-        $prix=$nbrePassagerAller <=4 ? "160€" :"300€";
-        $msgUser="Votre réservation à bien éte enregistrée\nDepart:" .$depart.
-        "\nDestination:" .$destination.
-        "\nNombre de passager aller:" .$nbrePassagerAller.
-        "\nNombre de passager rétour:" .$nbrePassagerRetour.
-        "\nDate de départ:" .$dateDepart.
-        "\nHeure de départ:" .$heureDepart.
-        "\nDate de rétour:" .$dateRetour.
-        "\nHeure de rétour:" .$heureRetour.
-        "\nPrix de votre réservation:" .$prix.
-        "\nMerci pour votre réservation à trés bientot!";
-        $message=(new \Swift_Message('Votre réservation pour' .$destination))
-        ->setFrom('bahamadoubailo67@gmail.com')
-        ->setTo($email)
-        ->setBody($msgUser);
-        $mailer->send($message); 
-        return $this->redirectToRoute('terminusAllerSimple');
-    }
- 
-    // Envoie en BDD reservation transport Memorial            
-    
-    /**
-     * @Route("/envoieBddMemorialAller", name="envoieBddMemorialAller")
-     */
-     public function envoieBddMemorialAller(Request $req)
-    {                    
-      $em = $this->getDoctrine()->getManager();
-            $memorial_aller =new MemorialAller();
-                   
-                $depart = $req->get('depart_aller');             
-                $destination =$req->get('destination_aller');  
-                $nbrePassager = $req->get('nb_passager_aller');
-                $email=$req->get('email');             
-                $tel=$req->get('phone');
-                $dateDepart= new \DateTime($req->get('date_depart_aller'));               
-                $heureDeDepart =$req->get('heure_depart');  // dump($heureDeDepart);die;
-             
-                    $memorial_aller->setDepart($depart);
-                    $memorial_aller->setDestination($destination);
-                    $memorial_aller->setNombrePassager($nbrePassager);
-                    $memorial_aller->setEmail($email); 
-                    $memorial_aller->setTelephone($tel);
-                    $memorial_aller->setDateDeDepart($dateDepart);
-                    $memorial_aller->setHeureDeDepart($heureDeDepart);
-                    
-                        $em->persist($memorial_aller);        
-                        $em->flush();   
-       
-
-        return $this->redirectToRoute('confirmation',['id'=>$memorial_aller->getId()]);
-    } 
-    
-    //          RECUPERATION EN BDD ALLER RETOUR Memorial       //  
-
-    
-     /**
-     * @Route("/envoieBddMemorialAllerRetour", name="envoieBddMemorialAllerRetour")
-     */
-    public function envoieBddMemorialAllerRetour(Request $req){                   
-        $em = $this->getDoctrine()->getManager();
-              $memorial_aller_retour =new MemorialAllerRetour();      
-          $depart = $req->get('depart');
-          $destination =$req->get('destination');
-          $email=$req->get('mail');
-          $tel=$req->get('telephone');
-          $nbrePassagerAller = $req->get('nb_passager_1');
-          $nbrePassagerRetour = $req->get('nb_passager_2');
-          $dateDepart= new \DateTime($req->get('date_depart'));
-          $dateRetour= new \DateTime($req->get('date_retour'));        
-          $heureDeDepart =$req->get('horaire_depart');
-          $heureDeRetour =$req->get('horaire_retour');
-        
-          $memorial_aller_retour-> setDepart($depart);
-          $memorial_aller_retour->setDestination($destination);
-          $memorial_aller_retour-> setEmail($email);
-          $memorial_aller_retour->setTelephone( $tel);
-          $memorial_aller_retour->setNombrePassagerAller( $nbrePassagerAller);
-          $memorial_aller_retour->setNombrePassagerRetour( $nbrePassagerRetour);
-          $memorial_aller_retour-> setDateDepart( $dateDepart);
-          $memorial_aller_retour->setDateRetour( $dateRetour);
-          $memorial_aller_retour->setHoraireDeDepart($heureDeDepart);
-          $memorial_aller_retour->setHoraireRetour($heureDeRetour);
-
-          $em->persist($memorial_aller_retour);
-          $em->flush();  
-                      
-      // return $this->render('transport/confirmationAllerRetour.html.twig');
-       return $this->redirectToRoute('confirmationAllerRetour',['id'=>$memorial_aller_retour->getId()]);
-    }
-                        
-
-            //             AMADOU  MEMORIAL FIN  CONTROLER TRANSPORT              //
-
 
     /**
      * @Route("/horairesTarifs", name="horairesTarifs")
@@ -343,36 +114,62 @@ class HomeController extends AbstractController
      */
     public function infoDestination()
     {
-        return $this->json(['username' => 'amine']);        
+        return $this->json(['username' => 'amine']);
     }
 
     /**
      * @Route("/reservationAller", name="reservationAller")
      */
-    public function reservationAller(Request $req) : Response {
+    public function reservationAller(Request $req, \Swift_Mailer $mailer): Response
+    {
         $em = $this->getDoctrine()->getManager();
+
+
+
+
 
         $depart_destination = new DepartDestination();
         $reservation = new Reservation();
         $trajet = new Trajet();
 
-        $depart = $req->get('depart_aller');
-        $destination = $req->get('destination_aller');
+        $dep = $req->get('depart_aller');
+        $dest = $req->get('destination_aller');
+        $repositoryLieux = $this->getDoctrine()->getRepository(Lieux::class);
+
+        $lieuxDep = $repositoryLieux->Trajet_LieuxCourant($dep);
+        $lieuxDest = $repositoryLieux->Trajet_LieuxCourant($dest);
+        $H = $req->get('exampleRadios');
+
+
+        $depart = $lieuxDep[0]->getLieux();
+        $destination = $lieuxDest[0]->getLieux();
         $nb = $req->get('nb_passager_aller');
         $date_depart = new \DateTime($req->get('date_depart_aller'));
         $horraire_depart = $req->get('horaire_depart_aller');
+        $horraire_depart_fixe = $req->get('horaire_depart_aller_fixe');
         $adresse = $req->get('adresse_aller');
         $pdp = $req->get('pdp_aller');
         $cp = $req->get('cp_aller');
         $ville = $req->get('ville_aller');
-        $pays = $req->get('pays_aller');
+        $pays = $req->get('pays_aller_simple');
 
         $depart_destination->setDepart($depart);
         $depart_destination->setDestination($destination);
-        
+        dump($H);
+        dump($horraire_depart);
+        dump($horraire_depart_fixe);
+
+        if ($H == "CheckHeurFixe") {
+            $heure = $horraire_depart_fixe;
+            $horairType = true;
+        } else {
+            $heure = $horraire_depart;
+            $horairType = false;
+        }
+        $reservation->setHorairesType($horairType);
         $reservation->setNbPassager($nb);
         $reservation->setDateDepart($date_depart);
-        $reservation->setHorraire($horraire_depart);
+        $reservation->setHorraire($heure);
         $reservation->setPointDePrise($pdp);
         $reservation->setUser($this->getUser());
         $reservation->setDepartDestination($depart_destination);
@@ -380,99 +177,231 @@ class HomeController extends AbstractController
         $reservation->setVille($ville);
         $reservation->setPays($pays);
         $reservation->setAdresse($adresse);
-        
+        $reservation->setTrajetLieux($lieuxDest[0]);
         $trajet->addReservation($reservation);
 
         $em->persist($trajet);
         $em->persist($depart_destination);
         $em->persist($reservation);
 
-        $em->flush();
-        
-        return $this->render('home/index.html.twig');
 
+        $em->flush();
+
+        $NombreHeurDifferance = $reservation->getDateDepart()->diff($reservation->getDateReservation());
+        dump($reservation);
+        dump($reservation->SuplementHeurdeNuit());
+        dump($NombreHeurDifferance);
+        dump($reservation->TrajetNormale());
+        dump($reservation->SuplementDomicile());
+        dump($reservation->SuplementHeurdeReservation());
+        dump($reservation->PrixTotal());
+        $reservation_Retour = new reservation();
+        $prix = $reservation->PrixTotal();
+        $prix1 = 0;
+
+        $mail = $reservation->getUser()->getEmail();
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('mbana1gm@gmail.com')
+            ->setTo($mail)
+            ->setBody(
+                $this->renderView(
+                    'aeroport/RecapitulatifClient.html.twig',
+                    [
+                        'Reservation1' => null,
+                        'Reservation' => $reservation,
+                        'Prix' => $prix,
+                        'Prix1' => $prix1,
+                    ]
+                ),
+                'text/html'
+
+            );
+        $mailer->send($message);
+
+
+        return $this->render('home/DetailReservation.html.twig', [
+            'user' => $this->getUser(),
+            'Reservation' => $reservation,
+            'ReservationRetour' => $reservation,
+            'Type' => "Allez Simple",
+            'Lieux_trajet' => $lieuxDep[0],
+        ]);
     }
     /**
      * @Route("/reservation", name="reservation")
      */
-    public function reservation(Request $req) : Response{
+    public function reservation(Request $req, \Swift_Mailer $mailer): Response
+    {
+
         $em = $this->getDoctrine()->getManager();
-        
+
+        $dep = $req->get('depart-allerRetour');
+        $dest = $req->get('destination-allerRetour');
+
+        $repositoryLieux = $this->getDoctrine()->getRepository(Lieux::class);
+
+        $lieuxDep = $repositoryLieux->Trajet_LieuxCourant($dep);
+
+        $lieuxDest = $repositoryLieux->Trajet_LieuxCourant($dest);
+
+        $HoraireFixeAller = $req->get('exampleRadios');
+        $HoraireFixeRetour = $req->get('exampleRadios_AR');
+        $HorairePersoAller = $req->get('exampleRadios');
+        $HorairePersoRetour = $req->get('exampleRadios_AR');
+
+        if ($HoraireFixeAller == "CheckHeurFixe_AR") {
+            $HoraireTypeAller = true;
+        } else {
+
+            $HoraireTypeAller = false;
+        }
+
+        if ($HoraireFixeRetour == "CheckHeurFixe_AR1") {
+            $horairTypeRetour = true;
+        } else {
+
+            $horairTypeRetour = false;
+        }
 
 
-        $depart = $req->get('depart');
-        $destination = $req->get('destination');
-        
+        dump($HoraireFixeAller);
+        dump($HoraireFixeRetour);
         $nb_aller = $req->get('nb_passager_1');
         $nb_retour = $req->get('nb_passager_2');
-        
-        if ($nb_retour == "undefined"){
+
+        if ($nb_retour == "undefined") {
             $nb_retour = $nb_aller;
         }
-        
+
         $date_depart = new \DateTime($req->get('date_depart'));
         $date_retour = new \DateTime($req->get('date_retour'));
-        
-        $horaire_depart = $req->get('horaire_depart');
-        $horaire_retour = $req->get('horaire_retour');
-        
-        $pdp = $req->get('pdp');
 
-        $adresse = $req->get('adresse');
-        $cp = $req->get('cp');
-        $ville = $req->get('ville');
-        $pays = $req->get('pays');
+        $horaire_depart = $req->get('horaire_depart_AR');
+        $horaire_retour = $req->get('horaire_retour_AR');
+        dump($horaire_depart);
+        dump($horaire_retour);
+        $pdpAller = $req->get('pdp-allez');
+        $pdpRetour = $req->get('pdp-Retour');
 
-        for ($i = 0; $i < 2; $i++){
-            $depart_destination = new DepartDestination();
-            $reservation = new Reservation();
-            $trajet = new Trajet();
+        $adresse = $req->get('adresse-Aller');
+        $cp = $req->get('cp-Aller');
+        $ville = $req->get('ville-Aller');
+        $pays = $req->get('pays-Aller');
 
-            if (!isset($tmp))
-            {
-                $depart_destination->setDepart($depart);
-                $depart_destination->setDestination($destination);
-                                
-                $reservation->setNbPassager($nb_aller);
-                $reservation->setDateDepart($date_depart);
-                $reservation->setHorraire($horaire_depart);
-                $reservation->setPointDePrise($pdp);
-                $reservation->setUser($this->getUser());
-                $reservation->setDepartDestination($depart_destination);
-                $reservation->setCodepostal($cp);
-                $reservation->setVille($ville);
-                $reservation->setPays($pays);
-                $reservation->setAdresse($adresse);
-                
-                $trajet->addReservation($reservation);
-        
-                $em->persist($trajet);
-                $em->persist($depart_destination);
-                $em->persist($reservation);
-        
+        $adresse_Retour = $req->get('adresse-Retour');
+        $cp_Retour = $req->get('cp-Retour');
+        $ville_Retour = $req->get('ville-Retour');
+        $pays_Retour = $req->get('pays-Retour');
+        $commentair_Retour = $req->get('commentaire');
 
-                $tmp = "ok";
-            }
-            else {
-                $depart_destination->setDepart($destination);
-                $depart_destination->setDestination($depart);
-                
-                $reservation->setNbPassager($nb_retour);
-                $reservation->setDateDepart($date_retour);
-                $reservation->setHorraire($horaire_retour);
-                $reservation->setUser($this->getUser());
-                $reservation->setDepartDestination($depart_destination);
-                
-                $trajet->addReservation($reservation);
-        
-                $em->persist($trajet);
-                $em->persist($depart_destination);
-                $em->persist($reservation);
-        
-            }
 
-        }
+        $depart_allez = new DepartDestination();
+        $reservation_Allez = new Reservation();
+        $trajet_Aller = new Trajet();
+
+        $depart_Retour = new DepartDestination();
+        $reservation_Retour = new Reservation();
+        $trajet_Retour = new Trajet();
+
+
+
+
+
+
+
+        // --------------------------------------------------------aller--------
+
+        $depart_allez->setDepart($lieuxDep[0]->getLieux());
+        $depart_allez->setDestination($lieuxDest[0]->getLieux());
+
+        $reservation_Allez->setHorairesType($HoraireTypeAller);
+        $reservation_Allez->setNbPassager($nb_aller);
+        $reservation_Allez->setDateDepart($date_depart);
+        $reservation_Allez->setHorraire($horaire_depart);
+        $reservation_Allez->setPointDePrise($pdpAller);
+        $reservation_Allez->setUser($this->getUser());
+        $reservation_Allez->setDepartDestination($depart_allez);
+        $reservation_Allez->setCodepostal($cp);
+        $reservation_Allez->setVille($ville);
+        $reservation_Allez->setPays($pays);
+        $reservation_Allez->setAdresse($adresse);
+        $reservation_Allez->setTrajetLieux($lieuxDest[0]);
+        $trajet_Aller->addReservation($reservation_Allez);
+        dump($reservation_Allez);
+        $em->persist($trajet_Aller);
+        $em->persist($depart_allez);
+        $em->persist($reservation_Allez);
+        dump($reservation_Allez->PrixTotal());
+
+        // --------------------------------Retour--------
+        $depart_Retour->setDepart($lieuxDest[0]->getLieux());
+        $depart_Retour->setDestination($lieuxDep[0]->getLieux());
+
+        $reservation_Retour->setHorairesType($horairTypeRetour);
+        $reservation_Retour->setNbPassager($nb_retour);
+        $reservation_Retour->setDateDepart($date_retour);
+        $reservation_Retour->setHorraire($horaire_retour);
+        $reservation_Retour->setPointDePrise($pdpRetour);
+        $reservation_Retour->setUser($this->getUser());
+        $reservation_Retour->setDepartDestination($depart_Retour);
+        $reservation_Retour->setCodepostal($cp_Retour);
+        $reservation_Retour->setVille($ville_Retour);
+        $reservation_Retour->setPays($pays_Retour);
+        $reservation_Retour->setAdresse($adresse_Retour);
+        $reservation_Retour->setTrajetLieux($lieuxDep[0]);
+        $trajet_Retour->addReservation($reservation_Retour);
+
+        $em->persist($trajet_Retour);
+        $em->persist($depart_Retour);
+        $em->persist($reservation_Retour);
+        dump($reservation_Retour->PrixTotal());
+        $prix = $reservation_Allez->PrixTotal();
+        $prix1 =  $reservation_Retour->PrixTotal();
+
+        $mail = $reservation_Allez->getUser()->getEmail();
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('mbana1gm@gmail.com')
+            ->setTo($mail)
+            ->setBody(
+                $this->renderView(
+                    'aeroport/RecapitulatifClient.html.twig',
+                    [
+                        'Reservation1' => $reservation_Retour,
+                        'Reservation' => $reservation_Allez,
+                        'Prix' => $prix,
+                        'Prix1' => $prix1,
+                    ]
+                ),
+                'text/html'
+
+            );
+        $mailer->send($message);
+
         $em->flush();
-        return $this->render('home/index.html.twig');
+        return $this->render('home/DetailReservation.html.twig', [
+            'user' => $this->getUser(),
+            'Reservation' => $reservation_Allez,
+            'ReservationRetour' => $reservation_Retour,
+            'Type' => "Allez retour",
+            'Lieux_trajet' => $lieuxDep[0],
+        ]);
+    }
+
+    /**
+     * @Route("/facture", name="Facture")
+     */
+    public function Factures()
+    {
+        return $this->render('admistration_reservation_aeroport/Facture.html.twig');
+    }
+    /**
+     * @Route("/payement", name="payement")
+     */
+    public function PayementStripe()
+    {
+        return $this->render('Payement/payement.html.twig', [
+            'user' => $this->getUser(),
+            'controller_name' => 'HomeController',
+        ]);
     }
 }

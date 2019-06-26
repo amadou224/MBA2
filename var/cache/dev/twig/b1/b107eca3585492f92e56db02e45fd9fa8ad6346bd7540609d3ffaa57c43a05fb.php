@@ -504,6 +504,6 @@ class __TwigTemplate_48921a6a354ab17bd369c3db25617ff75080bcd1129b444e1545f5e2a4e
     </ul>
 
 {% endblock %}
-", "@EasyAdmin/data_collector/easyadmin.html.twig", "C:\\FZ Symfony\\Symfony\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\data_collector\\easyadmin.html.twig");
+", "@EasyAdmin/data_collector/easyadmin.html.twig", "C:\\MBA\\ProjetDeSatge2019\\vendor\\easycorp\\easyadmin-bundle\\src\\Resources\\views\\data_collector\\easyadmin.html.twig");
     }
 }

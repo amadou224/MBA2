@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<head>
+
+
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+    <p>Bonjour :
+        <b>{{Reservation.user.civilite}}
+
+            {{Reservation.user.nom}}
+            {{Reservation.user.prenom}}
+        </b>,
+    </p>
+
+    <br>
+
+
+    <p>La navette du
+        <b>{{Reservation.dateDepart | date("d/m/y")}}</b>
+        à
+        {{Reservation.horraire}}
+        partant de
+        <b>{{Reservation.departDestination.depart}}</b>
+        pour
+        <b>{{Reservation.departDestination.destination}}</b>
+        que vous avez réservée sur Alsace-navette.com a été validée par nos services !
+    </p>
+
+    <p>
+
+        <b>{{Reservation.trajet.chauffeur.nom}}</b>
+        vous accueillera à bord de la navettes
+        <b>
+            {{Reservation.trajet.vehicule.typeVehicule}}</b>
+
+        à l'heure et au lieu prévu lors de votre réservation. Vous pourrez joindre votre conducteur par téléphone au
+        <b>
+            {{Reservation.trajet.chauffeur.telfix}}</b>
+
+
+    </p>
+
+    <p>Vous pouvez également à tout moment retrouver ces informations sur Alsace-navette.com en vous connectant à l'aide de votre adresse e-mail et du mot de passe que vous avez reçu par courriel lors de votre première réservation.
+    </p>
+
+
+    <p>
+        Pour nous aider à améliorer nos services, nous avons mis en place un sondage, accessible ici.</p>
+
+
+    <p>Merci d'utiliser nos services et à bientôt sur Alsace-Navette.com !!</p>
+
+
+</body></html>{# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ #}

@@ -477,6 +477,6 @@ class __TwigTemplate_57e23a795bcaf19e87339334d80cf4ea4458a661c1630cb8bd93c8ce3c9
         {% endfor %}
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "C:\\FZ Symfony\\Symfony\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
+", "@WebProfiler/Collector/events.html.twig", "C:\\MBA\\ProjetDeSatge2019\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
     }
 }

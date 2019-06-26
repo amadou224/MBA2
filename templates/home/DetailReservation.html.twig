@@ -1,0 +1,217 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="Jekyll v3.8.5" name="generator">
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="stylesheets/base.css" rel="stylesheet">
+    <link href="stylesheets/aeroport.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+
+    <div style="border:3px blue dashed; padding:30px 80px 10px 80px; height:900px;">
+
+        <div class="row" style="text-align:center;background-color:#2cb1f3;">Votre trajet</div>
+        <div class="row" style="background-color:#d9e1e5; margin-bottom:20px;">
+            <div class="col-4">
+                <div style="font-weight: bold;">Type de réservation:</div>
+                {{Type}}
+            </div>
+            <div class="col-4" style="text-align:center;">
+                <div style="font-weight: bold;">Dépar:</div>
+                {{Lieux_trajet.lieux}}
+            </div>
+            <div class="col-4" style="text-align:right;">
+                <div style="font-weight: bold;">Déstination:
+                </div>
+                {{Reservation.departDestination.destination}}</div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-6" style="border:0px blue dashed margin:0px 10px 10px 0px; padding:0px 10px 10px 0px;">
+
+                <div class="" style="background-color:#2cb1f3; height:30px;">Allez
+                </div>
+                <table style="background-color:#d9e1e5" width="100%">
+
+                    <tr>
+
+
+                        <td align="left" style="font-weight: bold;">Date :
+                        </td>
+
+
+                        <td>{{Reservation.dateDepart.date | date("d/m/y")}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Heure :</td>
+
+
+                        <td>{{Reservation.horraire}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Point de prise / dépose sur Strasbourg :</td>
+
+
+                        <td>{{Reservation.pointDePrise}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Adresse :</td>
+
+
+                        <td>{{Reservation.adresse}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Ville :</td>
+
+
+                        <td>
+                            {{Reservation.codepostal}}
+                            {{Reservation.ville}},
+                            {{Reservation.pays}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">
+                            Nombre d'Adulte :</td>
+
+
+                        <td lign="left">{{Reservation.nbPassager}}</td>
+
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="col-6" id="allez-retour" style="border:0px blue dashed margin:0px 0px 10px 10px; padding:0px 0px 10px 10px; display:block">
+
+                <div class="" style="background-color:#2cb1f3; height:30px;">Retour</div>
+                <table style="background-color:#d9e1e5" width="100%">
+
+                    <tr>
+
+
+                        <td align="left" style="font-weight: bold;">Date :
+                        </td>
+
+
+                        <td>{{ReservationRetour.dateDepart.date | date("d/m/y")}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Heure :</td>
+
+
+                        <td>{{ReservationRetour.horraire}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Point de prise / dépose sur Strasbourg :</td>
+
+
+                        <td>{{ReservationRetour.pointDePrise}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Adresse :</td>
+
+
+                        <td>{{ReservationRetour.adresse}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">Ville :</td>
+
+
+                        <td>
+                            {{ReservationRetour.codepostal}}
+                            {{ReservationRetour.ville}},
+                            {{ReservationRetour.pays}}</td>
+
+
+                    </tr>
+                    <tr>
+                        <td align="left" style="font-weight: bold;">
+                            Nombre d'Adulte :</td>
+
+
+                        <td lign="left">{{ReservationRetour.nbPassager}}</td>
+
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+        </div>
+        <div class="d-flex justify-content-center">
+
+            <button href="{{path('payement')}}" class="btn btn-success" type="submit">Payement!</button>
+
+
+        </div>
+
+    </div>
+
+
+    {# {<div class="col-6">
+                                        
+                                                <div style="text-align:center;background-color:#2cb1f3;">Allez</div>
+                                        
+                                                <div class="">
+                                                    <div style="font-weight: bold; background-color:#d9e1e5;">Type de réservation:</div>
+                                                    {{Type}}
+                                                </div>
+                                            </div>
+                                            <div class="col-6" style;">
+                                        
+                                        
+                                                <div style="text-align:center;background-color:#2cb1f3;">Retour</div>
+                                        
+                                                <div class="">
+                                                    <div style="font-weight: bold; background-color:#d9e1e5;">Type de réservation:</div>
+                                                    {{Type}}
+                                                </div>
+                                            </div>
+                                            #}
+    {# <h1>{{Reservation.pointDePrise}}</h1>
+                                        
+                                            <h1>{{Reservation.horraire}}</h1>
+                                            <h1>{{Reservation.nbPassager}}</h1>
+                                        
+                                            <h1>{{Reservation.nbPassager}}</h1>
+                                            <h1>{{Reservation.user.nom}}</h1>
+                                            <h1>{{Reservation.departDestination.depart}}</h1>
+                                            <h1>{{Reservation.departDestination.destination}}</h1> #}
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="javascript/reservationAeroport.js"></script>
+
+{% endblock %}

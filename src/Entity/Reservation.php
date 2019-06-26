@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Lieux;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -88,10 +90,25 @@ class Reservation
      */
     private $pays;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieux", inversedBy="reservation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Trajet_lieux;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Horaires_Type;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Statu;
+
     public function __construct()
     {
         $this->dateReservation = new \DateTime();
-
     }
 
     public function getId(): ?int
@@ -267,7 +284,125 @@ class Reservation
         return $this;
     }
 
-    public function __toString(){
+    public function __toString()
+    {
         return "Reservation numéro " . $this->id;
+    }
+
+    public function getTrajetLieux(): ?Lieux
+    {
+        return $this->Trajet_lieux;
+    }
+    public function setTrajetLieux(?Lieux $Trajet_lieux): self
+    {
+        $this->Trajet_lieux = $Trajet_lieux;
+
+        return $this;
+    }
+
+    public function getHorairesType(): ?bool
+    {
+        return $this->Horaires_Type;
+    }
+
+    public function setHorairesType(bool $Horaires_Type): self
+    {
+        $this->Horaires_Type = $Horaires_Type;
+
+        return $this;
+    }
+
+
+    public function TrajetNormale()
+    {
+        $PersMin = $this->Trajet_lieux->getNombreDePassagerMinimum();
+        $tarif = $this->Trajet_lieux->getTarif();
+
+        if ($this->getNbPassager() <= $PersMin) {
+            $PrixDuTrajet = $PersMin * $tarif;
+        } else {
+            $PrixDuTrajet = $this->getNbPassager() * $tarif;
+        }
+
+
+
+        return  $PrixDuTrajet;
+    }
+    public function horaireFixeAlademande()
+    {
+        if ($this->Horaires_Type == true) {
+            $SuplementHoraire = 0;
+        } else {
+
+            $SuplementHoraire = 16;
+        }
+
+        return  $SuplementHoraire;
+    }
+    public function SuplementDomicile()
+    {
+        if ($this->getPointDePrise() == "Domicile") {
+            $PriseEnChargeDomicileStasbourg = 10;
+        } else {
+
+            $PriseEnChargeDomicileStasbourg = 0;
+        }
+        return $PriseEnChargeDomicileStasbourg;
+    }
+
+
+    public function SuplementHeurdeReservation()
+    {
+        $NombreHeurDifferance = $this->dateDepart->diff($this->dateReservation);
+        $heure = $NombreHeurDifferance->days * 24 + $NombreHeurDifferance->h;
+
+        if ($heure <= 72 && $heure >= 24) {
+            $DernierMinute = 7;
+        } else if ($heure <= 24) {
+
+            $DernierMinute = 14;
+        } else {
+            $DernierMinute = 0;
+        }
+
+
+        return $DernierMinute;
+    }
+    public function SuplementHeurdeNuit()
+    {
+        $heurReservation = strtotime($this->horraire);
+        $max = strtotime("21:00");
+        $min = strtotime("07:15");
+
+        if ($heurReservation > $max || $heurReservation <=  $min) {
+            $ForfaitDeNuit = 14;
+        } else {
+            $ForfaitDeNuit = 0;
+        }
+
+
+        return $ForfaitDeNuit;
+    }
+
+
+
+    public function PrixTotal()
+    {
+
+
+        $prix = $this->SuplementHeurdeReservation() + $this->SuplementDomicile() + $this->TrajetNormale() + $this->SuplementHeurdeNuit() + $this->horaireFixeAlademande();
+        return $prix;
+    }
+
+    public function getStatu(): ?string
+    {
+        return $this->Statu;
+    }
+
+    public function setStatu(?string $Statu): self
+    {
+        $this->Statu = $Statu;
+
+        return $this;
     }
 }

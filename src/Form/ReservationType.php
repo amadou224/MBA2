@@ -6,8 +6,6 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ReservationType extends AbstractType
 {
@@ -16,12 +14,20 @@ class ReservationType extends AbstractType
         $builder
             ->add('horraire')
             ->add('nbPassager')
-            ->add('dateReservation', DateType::class)
-            ->add('dateDepart', DateType::class)
-            ->add('pointDePrise', TextType::class)
-            ->add('commentaire', TextType::class)
-            ->add('adresse', TextType::class)
-        ;
+            ->add('dateReservation')
+            ->add('dateDepart')
+            ->add('pointDePrise')
+            ->add('commentaire')
+            ->add('adresse')
+            ->add('codepostal')
+            ->add('ville')
+            ->add('pays')
+            ->add('Horaires_Type')
+            ->add('user')
+            ->add('departDestination')
+            ->add('trajet')
+            ->add('facture');
+        // ->add('Trajet_lieux');
     }
 
     public function configureOptions(OptionsResolver $resolver)

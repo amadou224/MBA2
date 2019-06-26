@@ -125,20 +125,6 @@ class __TwigTemplate_66573a17949cfbc6af94d02020fe03e4e0665676fa51916fa3452d1d267
                     onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
                     style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff;\"><strong>Aéroport</strong></a>
-
-                    <!--             NOUVELLE FONCTIONNALITE     MEMORIAL       -->
-
-
-
-                     <a class=\"btn btn-lg \" href=\"/memorialPageAcceuil\"
-                    onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
-                    onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
-                    style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff;\"><strong>Mémorial de Struthof</strong></a>
-
-                                                                         
-
-
-                    <!-- NOUVELLE FONCTIONNALLITE  TRANSPORT -->
                 <a class=\"btn btn-lg \" href=\"#\"
                     onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
@@ -160,7 +146,7 @@ class __TwigTemplate_66573a17949cfbc6af94d02020fe03e4e0665676fa51916fa3452d1d267
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
                     style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff;\"><strong>Tourisme
                         Alsace</strong> </a>
-                <a class=\"btn  btn-lg \" href=\"/royalpalace\"
+                <a class=\"btn  btn-lg \" href=\"#\"
                     onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
                     style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff; border-color: #fff;\"><strong>Royal
@@ -265,20 +251,6 @@ class __TwigTemplate_66573a17949cfbc6af94d02020fe03e4e0665676fa51916fa3452d1d267
                     onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
                     style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff;\"><strong>Aéroport</strong></a>
-
-                    <!--             NOUVELLE FONCTIONNALITE     MEMORIAL       -->
-
-
-
-                     <a class=\"btn btn-lg \" href=\"/memorialPageAcceuil\"
-                    onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
-                    onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
-                    style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff;\"><strong>Mémorial de Struthof</strong></a>
-
-                                                                         
-
-
-                    <!-- NOUVELLE FONCTIONNALLITE  TRANSPORT -->
                 <a class=\"btn btn-lg \" href=\"#\"
                     onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
@@ -300,7 +272,7 @@ class __TwigTemplate_66573a17949cfbc6af94d02020fe03e4e0665676fa51916fa3452d1d267
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
                     style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff;\"><strong>Tourisme
                         Alsace</strong> </a>
-                <a class=\"btn  btn-lg \" href=\"/royalpalace\"
+                <a class=\"btn  btn-lg \" href=\"#\"
                     onmouseover=\"this.style.borderColor= '#fbc02d'; this.style.color= '#fff';\"
                     onmouseout=\"this.style.borderColor='#fff'; this.style.color= '#fbc02d';\"
                     style=\"color: #fbc02d; padding: 5 px; border: 10px inset; border-color: #fff; border-color: #fff;\"><strong>Royal
@@ -348,6 +320,6 @@ class __TwigTemplate_66573a17949cfbc6af94d02020fe03e4e0665676fa51916fa3452d1d267
 </div>
 
 
-{% endblock %}", "home/home.html.twig", "C:\\FZ Symfony\\Symfony\\templates\\home\\home.html.twig");
+{% endblock %}", "home/home.html.twig", "C:\\MBA\\ProjetDeSatge2019\\templates\\home\\home.html.twig");
     }
 }

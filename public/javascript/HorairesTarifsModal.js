@@ -37,3 +37,8 @@ function showHorairesEte(id) {
         footerButton.className = "btn btn-yellow"
     }
 }
+function InformationTrajets()
+{
+    var traj = document.getElementById('informationTrajets')
+        traj.style.display = "block";
+}

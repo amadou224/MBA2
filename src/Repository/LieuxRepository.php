@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Lieux;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-
+use Doctrine\ORM\QueryBuilder;
 /**
  * @method Lieux|null find($id, $lockMode = null, $lockVersion = null)
  * @method Lieux|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,6 +19,19 @@ class LieuxRepository extends ServiceEntityRepository
         parent::__construct($registry, Lieux::class);
     }
 
+    /**
+     * @return Lieux recupère le lieux d'ont l'id est passé en parametre
+     */
+
+    public function Trajet_LieuxCourant($id)
+    {
+        return $this->createQueryBuilder('B')
+            ->Where( 'B.id = :val')
+            ->setParameter( 'val', $id)
+        ->getQuery()
+        ->getResult();
+    }
+    
     // /**
     //  * @return Lieux[] Returns an array of Lieux objects
     //  */

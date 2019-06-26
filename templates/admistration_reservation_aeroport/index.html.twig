@@ -1,0 +1,280 @@
+{% extends 'base.html.twig' %}
+{% block head %}
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta content="Jekyll v3.8.5" name="generator">
+
+{% endblock %}
+
+{% block stylesheets %}
+    <link href="stylesheets/base.css" rel="stylesheet">
+    <link href="stylesheets/aeroport.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+
+    <div id="FormAllerSimple" style="display:block;">
+        <form class="needs-validation" name="formReservation" method="get" action="{{ path('modifie_reservation',{'id':Reservation.id})}}" novalidate>
+
+
+            <div
+                class="d-flex justify-content-center">
+                {# ...................................lieux Départ...........................  #}
+                <div class="col-md-6 mb-3">
+                    <div>
+                        <label for="">Départ</label>
+                        <select class="form-control" id="depart" name="depart_aller" onclick="AfficherLesBoutonsHoraires()" style="text-align:center;">
+
+
+                            <option value={{Reservation.departDestination.depart}}>{{Reservation.departDestination.depart}}</option>
+                            {% for ville in lieux %}
+                                <option name="FormulaireDepart" value={{ville.id}}>{{ville.lieux}}</option>
+                            {% endfor %}
+
+                        </select>
+                        <div id="contentJS"></div>
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+                    </div>
+                </div>
+                {# ...................................Fin...........................  #}
+                {# ...................................lieux Destination...........................  #}
+                <div class="col-md-6 mb-3">
+                    <div>
+                        <label for="">Destination</label>
+                        <select class="form-control Destination" name="destination_aller" required>
+                            <option value={{Reservation.departDestination.destination}}>{{Reservation.departDestination.destination}}</option>
+                            {% for ville in lieux %}
+                                <option name="FormulaireDepart" value={{ville.id}}>{{ville.lieux}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {# ...................................Fin...........................  #}
+
+
+            <hr>
+
+                <div></div>
+                {% if Reservation.pointDePrise == "Domicile" %}
+
+
+                    <div class="d-flex justify-content-center">
+
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+
+                                <label for="">Point de prise</label>
+                                <select class="form-control" id="pdp" name="pdp_aller" onchange="Domicile()">
+                                    <option value={{Reservation.pointDePrise}}>{{Reservation.pointDePrise}}</option>
+                                    <option value="Gare central">Gare central</option>
+                                    <option value="Palais des droits de l'Homme">Palais des droits de l'Homme</option>
+                                    <option value="Hotel Hilton">Hotel Hilton</option>
+                                    <option value="Domicile">Domicile</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+
+
+                    </div>
+                    <div class="d-flex justify-content-center">
+
+
+                        <div class="col-md-6 mb-3" id="domicile" style="display:block;">
+
+                            <label for="firstName">Adresse</label>
+                            <input class="form-control" name="adresse_aller" placeholder="Adresse ..." type="text" value="{{Reservation.adresse}} ">
+
+
+                            <label class="mt-3" for="firstName">Code Postal</label>
+                            <input class="form-control" name="cp_aller" placeholder="Code postal ..." type="text" value={{Reservation.codepostal}}>
+
+
+                            <label class="mt-3" for="firstName">Ville</label>
+                            <input class="form-control" name="ville_aller" placeholder="Ville ..." type="text" value={{Reservation.ville}}>
+
+
+                            <label class="mt-3" for="firstName">Pays</label>
+                            <select class="form-control" name="pays_aller_simple">
+                                <option value={{Reservation.pointDePrise}}>{{Reservation.pays}}</option>
+                                <option value="France">France</option>
+                                <option value="Allemagne">Allemagne</option>
+                                <option value="Suisse">Suisse</option>
+                            </select>
+
+                        </div>
+                    </div>
+                {% else %}
+
+
+                    <div class="d-flex justify-content-center">
+
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+
+                                <label for="">Point de prise</label>
+                                <select class="form-control" id="pdp" name="pdp_aller" onchange="Domicile()">
+                                    <option value={{Reservation.pointDePrise}}>{{Reservation.pointDePrise}}</option>
+                                    <option value="Gare central">Gare central</option>
+                                    <option value="Palais des droits de l'Homme">Palais des droits de l'Homme</option>
+                                    <option value="Hotel Hilton">Hotel Hilton</option>
+                                    <option value="Domicile">Domicile</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+
+
+                    </div>
+
+
+                {% endif %}
+                <div class="d-flex justify-content-center">
+
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="">Nombre de Passager</label>
+                            <input class="form-control" name="nb_passager_aller" placeholder="Nombre de passagger ..." type="number" value={{Reservation.nbPassager}}>
+
+
+                        </div>
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please choose a number.
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group">
+                            <label for="">Date de départ</label>
+                            {{Reservation.dateDepart | date("d/m/y")}}
+                            <input class="form-control" name="date_depart_aller" required type="date" value="{{Reservation.dateDepart | date("d/m/y")}}">
+
+
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-around">
+                    <div class="row"></div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-6 mb-3">
+
+
+                        <div class="form-group" id="FormHeurFixes" style="display:none;">
+                            <label for="">Horaires fixées par la société</label>
+                            <select class="form-control" id="horaire_fixe_val" name="horaire_depart_aller_fixe" type="string">
+
+
+                                <div id="for"></div>
+
+                            </select>
+
+                        </div>
+                        <div class="form-group" id="FormHeurPerso" style="display:none;">
+
+
+                            <label for="">Horaires personnalisées</label>
+
+                            <input class="form-control" id="horaire_Perso_val" name="horaire_depart_aller" placeholder="Veuillez choisir une heure de rendez-vous :" style=" text-align:center" type="time">
+
+
+                            <div class="invalid-feedback">
+                                Please choose a number.
+                            </div>
+
+                        </div>
+
+
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center">
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label for="firstName">Commentaire</label>
+                        <input class="form-control" name="commentaire_aller" type="text" value="{{Reservation.commentaire}}">
+                    </div>
+                </div>
+
+
+            </div>
+            {# ...................................lieux Destination...........................  #}
+            <div class="d-flex justify-content-center">
+
+                <div class="col-md-6 mb-3">
+                    <div>
+                        <label for="">Chauffeur</label>
+                        <select class="form-control Destination" name="Chauffeur" required>
+
+                            {% for chauffeurs in Chauffeur %}
+                                <option value={{chauffeurs.id}}>{{chauffeurs.nom}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="invalid-feedback">
+                            Please choose a number.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# ...................................Fin...........................  #}
+        <div class="d-flex justify-content-center">
+
+            <div class="col-md-6 mb-3">
+                <div>
+                    <label for="">Véhicule</label>
+
+                    <select class="form-control Destination" name="Vehicule" required>
+
+
+                        {% for vehicule in Vehicule %}
+                            <option value={{vehicule.id}}>{{vehicule.typeVehicule}}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                        Please choose a number.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# ...................................Fin...........................  #}
+
+    <div class="d-flex justify-content-center">
+
+        <button class="btn btn-success" type="submit">Confirmer la réservation !</button>
+
+    </div>
+    <div class="d-flex justify-content-center">
+
+        <a class="btn btn-danger" href="{{ path('annulation_reservation',{'id':Reservation.id})}}" type="submit">Annuler la réservation</a>
+
+
+    </div>
+
+</form></div>{% endblock %}{% block javascripts %}<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><script src="https://unpkg.com/axios/dist/axios.min.js"></script><script src="javascript/reservationAeroport.js"></script><script src="javascript/fonctionsjquery.js"></script>{% endblock %}
